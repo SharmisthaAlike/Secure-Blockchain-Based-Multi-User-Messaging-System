@@ -1,0 +1,6 @@
+pycryptodome==3.20.0
+web3==6.15.1
+py-solc-x==1.1.1
+tk
+eth-account==0.10.0
+netifaces
