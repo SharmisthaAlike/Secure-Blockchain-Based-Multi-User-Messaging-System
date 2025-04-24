@@ -45,6 +45,7 @@ app/
 ├── __init__.py
 ├── client.py        # Client-side implementation
 ├── server.py        # Server implementation
+├── blockchain.py    # Blockchain implementation
 ├── gui.py           # User interface
 ├── crypto.py        # Cryptography handling
 ├── database.py      # Message storage
