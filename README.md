@@ -24,7 +24,7 @@ A secure multi-user chat application built with Python, featuring real-time mess
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone https://github.com/SharmisthaAlike/Secure-Blockchain-Based-Multi-User-Messaging-System
 cd secure-chat
 ```
 
