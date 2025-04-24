@@ -1,90 +1,94 @@
 
-# Secure-Blockchain-Based-Multi-User-Messaging-System
+# Secure Chat Application
 
-This project implements a secure, decentralized messaging system that uses AES encryption, Ethereum blockchain verification, and IPFS storage to ensure message integrity and privacy. The system supports multi-user communication, RSA-based authentication, and message acknowledgments, making it a trustless and tamper-proof chat platform. The system is now optimized for deployment on Railway.app using FastAPI as the backend.
-
+A secure multi-user chat application built with Python, featuring real-time messaging, file sharing, and message history. The application uses SSL/TLS encryption for secure communication between clients and server.
 
 ## Features
 
-- End-to-End Encrypted Messaging (AES-256)
-- User Authentication with RSA Keys (Public-Private Key Encryption)
-- Blockchain-Based Message Verification (Ethereum & Web3.py)
-- Multi-User Support (WebSockets-based real-time chat via FastAPI)
-- Decentralized Message Storage (IPFS Integration)
-- Message Delivery Acknowledgments
-- Timestamped Messages
-- Deployed on Railway.app using Python (FastAPI)
+- Secure encrypted communication
+- Multi-user support
+- Real-time messaging
+- File sharing capabilities
+- Message history
+- User status updates
+- Graphical User Interface
 
 
-## Tech Stack
+## Prerequisites
 
-Python (FastAPI, Web3.py, Cryptography, WebSockets)
+- Python 3.x
+- pip (Python package installer)
 
-Solidity (Ethereum Smart Contract for message verification)
 
-IPFS (Decentralized message storage)
-
-Ganache (Ethereum Local Testnet)
-
-Railway.app (Serverless deployment)
 ## Setup & installation
 
-Install Dependencies
+1. Clone the repository:
 ```bash
-pip install fastapi uvicorn web3 cryptography pycryptodome ipfshttpclient
+git clone <repository-url>
+cd secure-chat
 ```
 
-Generate RSA Keys for Authentication
-```python
-from Crypto.PublicKey import RSA
-
-def generate_keys():
-    key = RSA.generate(2048)
-    with open("private_key.pem", "wb") as f:
-        f.write(key.export_key())
-    with open("public_key.pem", "wb") as f:
-        f.write(key.publickey().export_key())
-    print("RSA Key Pair Generated!")
-
-generate_keys()
-```
-
-Run the FastAPI WebSocket Server
+2. Install required packages:
 ```bash
-uvicorn server:app --host 0.0.0.0 --port 8000
+pip install -r requirements.txt
 ```
 
-Run the Chat Client
+3. Generate SSL certificate (if not present):
 ```bash
-  python client.py
+openssl req -x509 -newkey rsa:4096 -keyout app/certs/server.key -out app/certs/server.pem -days 365 -nodes -subj "/CN=localhost"
 ```
 
 
-## Deploying on Railway.app
+## Project Structure
+```
+app/
+├── __init__.py
+├── client.py        # Client-side implementation
+├── server.py        # Server implementation
+├── gui.py           # User interface
+├── crypto.py        # Cryptography handling
+├── database.py      # Message storage
+└── certs/           # SSL certificates
+    └── server.pem
+```
 
-1. Install Railway CLI:
+## Running the Application
+
+### Starting the Server
+
+1. On the server machine:
 ```bash
-curl -fsSL https://railway.app/install.sh | sh
+python -m app.server
+```
+2. Note the IP address displayed in the console
+
+### Starting a Client
+
+1. On the same machine (localhost):
+```bash
+python -m app.client
 ```
 
-2. Login to railway:
+2. On a different machine (same network):
 ```bash
-railway login
+python -m app.client --server SERVER_IP
 ```
+Replace `SERVER_IP` with the IP address shown by the server.
 
-3. Initialize Railway project:
-```bash
-railway init
-```
+## Usage
 
-4. Deploy FastAPI server:
-```bash
-railway up
-```
-## Ethereum Smart Contract Deployment
-1. Use Remix IDE or Hardhat to deploy SecureMessaging.sol.
-2. Copy the deployed contract address and update contract_address in Python scripts.
-3. Start Ganache and connect Web3.py to http://127.0.0.1:8545.
+1. Launch the client application
+2. Enter your username in the login window
+3. Start chatting!
+
+### Features:
+- Type messages in the input field and press Enter or click Send
+- Click 📎 to send files
+- Click 📜 to view message history
+- See online users in the left panel
+- Check connection status at the top
+
+
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the [MIT License](https://choosealicense.com/licenses/mit/).
